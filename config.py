@@ -70,8 +70,8 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
-    Key([mod], "r", lazy.spawncmd(),
-        desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawn("rofi -show file-browser-extended  -show-icons"),
+        desc=""),
 
 
     Key([mod],"w",lazy.group[""].toscreen()),
@@ -208,21 +208,13 @@ screens = [
                        filename = "~/.config/qtile/icons/manjaro.svg",
                        padding =2
                        ),
-                       widget.TextBox(
-                        text="✏️",
-                        foreground=colors[2],
-                        background=colors[0],
-                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('howl /home/firas/.config/qtile/config.py')},
-                        padding = 2,
-                        fontsize=12
-                        ),
                 widget.GroupBox(
                        font = "Ubuntu Bold",
                        fontsize = 16,
                        margin_y = 3,
                        margin_x = 0,
                        padding_y = 10,
-                       padding_x = 8,
+                       padding_x = 10,
                        borderwidth = 3,
                        active = colors[2],
                        inactive = colors[2],
@@ -242,13 +234,6 @@ screens = [
                        foreground = colors[5],
                        background = colors[2]
                        ),
-                widget.Prompt(
-                       prompt = prompt,
-                       font = "Ubuntu Mono",
-                       padding = 10,
-                       foreground = colors[3],
-                       background = colors[1]
-                       ),
                 widget.WindowName(
                        foreground = colors[6],
                        background = colors[0],
@@ -260,59 +245,6 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-
-                widget.TextBox(
-                    text = " 🌡️",
-                    padding = 0,
-                    foreground = colors[6],
-                    background = colors[0],
-                    fontsize = 13
-                    ),
-                widget.ThermalSensor(
-                    foreground = colors[2],
-                    background = colors[0],
-                    threshold = 90,
-                    padding = 5
-                    ),
-                widget.Sep(
-                       linewidth = 0,
-                       padding = 1,
-                       foreground = colors[5],
-                       background = colors[2]
-                       ),
-                widget.TextBox(
-                       text = " 📊️",
-                       foreground = colors[2],
-                       background = colors[0],
-                       padding = 0,
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop')},
-                       fontsize = 14
-                       ),
-                widget.Memory(
-                       foreground = colors[2],
-                       background = colors[0],
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop')},
-                       padding = 5
-                       ),
-                widget.Sep(
-                       linewidth = 0,
-                       padding = 1,
-                       foreground = colors[5],
-                       background = colors[2]
-                       ),
-                widget.Net(
-                    foreground = colors[2],
-                       background = colors[0],
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('nm-connection-editor')},
-                    format = '{down} ↓↑ {up}',
-                    interface = "wlo1"
-                ),
-                widget.Sep(
-                       linewidth = 0,
-                       padding = 1,
-                       foreground = colors[5],
-                       background = colors[2]
-                       ),
                 widget.TextBox(
                        text = " 📅 ",
                        foreground = colors[6],
@@ -321,11 +253,17 @@ screens = [
                        fontsize = 14
                        ),
                 widget.Clock(
-                    foreground = colors[6],
+                    foreground = colors[2],
                     background = colors[0],
                     padding = 3,
                     format='%A,  %b %d - %I:%M %p  '
                 ),
+                widget.Sep(
+                       linewidth = 0,
+                       padding = 1,
+                       foreground = colors[5],
+                       background = colors[2]
+                       ),
                 widget.TextBox(
                     text = "🎙️",
                     padding = 2,
@@ -339,7 +277,7 @@ screens = [
                     padding = 2
                 ),
                 widget.QuickExit(
-                    default_text= "🔐️",
+                    default_text= "🔑",
                     fontsize= 16,
                     countdown_format= '{}',
                     foreground = colors[4],
